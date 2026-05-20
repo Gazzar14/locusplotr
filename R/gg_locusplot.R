@@ -42,7 +42,6 @@
 gg_locusplot <- function(df, lead_snp = NULL, ld_df = NULL, rsid = rsid, chrom = chrom, pos = pos, ref = ref, alt = alt, effect = NULL, std_err = NULL, p_value = p_value, trait = NULL, plot_pvalue_threshold = 0.1, plot_subsample_prop = 0.25, plot_distance = 500000, genome_build = "GRCh37", population = "ALL", plot_genes = FALSE, plot_recombination = FALSE, plot_title = NULL, plot_subtitle = NULL, path = NULL) {
   # Check input arguments to ensure they are of the correct type and within reasonable ranges
   checkmate::assert_data_frame(df)
-  # checkmate::assert_string(lead_snp)
   checkmate::assert_numeric(plot_pvalue_threshold, upper = 1)
   checkmate::assert_numeric(plot_subsample_prop, lower = 0, upper = 1)
   checkmate::assert_numeric(plot_distance, lower = 0)
