@@ -48,6 +48,12 @@ gg_locusplot <- function(df, lead_snp = NULL, ld_df = NULL, rsid = rsid, chrom =
   checkmate::assert_logical(plot_genes)
   checkmate::assert_choice(genome_build, choices = c("GRCh37", "GRCh38"))
 
+  checkmate::assert_choice(toupper(genome_build), choices = c("GRCH37", "HG19", "GRCH38", "HG38"))
+  genome_build <- case_when(
+    toupper(genome_build) %in% c("GRCH37", "HG19") ~ "GRCh37",
+    toupper(genome_build) %in% c("GRCH38", "HG38") ~ "GRCh38"
+  )
+
 
   if(!is.null(ld_df)) {
     checkmate::assert_data_frame(ld_df)
