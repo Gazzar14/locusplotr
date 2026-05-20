@@ -46,6 +46,8 @@ gg_locusplot <- function(df, lead_snp = NULL, ld_df = NULL, rsid = rsid, chrom =
   checkmate::assert_numeric(plot_subsample_prop, lower = 0, upper = 1)
   checkmate::assert_numeric(plot_distance, lower = 0)
   checkmate::assert_logical(plot_genes)
+  checkmate::assert_choice(genome_build, choices = c("GRCh37", "GRCh38"))
+
 
   if(!is.null(ld_df)) {
     checkmate::assert_data_frame(ld_df)
