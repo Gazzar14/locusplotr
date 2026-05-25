@@ -46,7 +46,6 @@ gg_locusplot <- function(df, lead_snp = NULL, ld_df = NULL, rsid = rsid, chrom =
   checkmate::assert_numeric(plot_subsample_prop, lower = 0, upper = 1)
   checkmate::assert_numeric(plot_distance, lower = 0)
   checkmate::assert_logical(plot_genes)
-  checkmate::assert_choice(genome_build, choices = c("GRCh37", "GRCh38"))
 
   checkmate::assert_choice(toupper(genome_build), choices = c("GRCH37", "HG19", "GRCH38", "HG38"))
   genome_build <- case_when(
@@ -60,6 +59,9 @@ gg_locusplot <- function(df, lead_snp = NULL, ld_df = NULL, rsid = rsid, chrom =
     required_cols <- c("rsid1", "rsid2", "r")
     if(!all(required_cols %in% tolower(colnames(ld_df)))) {
       stop("ld_df must contain 'RSID1', 'RSID2', and 'r' columns (case-insensitive).")
+    }
+    if (plot_genes || plot_recombination) {
+      cli::cli_alert_info("Custom LD data provided. Ensure that your supplied 'genome_build' ({genome_build}) matches the coordinate assembly of your primary GWAS data.")
     }
   }
 
